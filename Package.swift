@@ -21,8 +21,5 @@ let package = Package(
         .target(
             name: "AnyCodable",
             dependencies: []),
-        .testTarget(
-            name: "AnyCodableTests",
-            dependencies: ["AnyCodable"]),
     ]
 )
