@@ -127,8 +127,6 @@ public extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
             let key = JSONCodingKeys(stringValue: key)
             switch jsonValue {
             case let value as Bool where type(of: jsonValue) == type(of: NSNumber(booleanLiteral: true)) || type(of: jsonValue) == Swift.Bool.self:
-                            try encode(value, forKey: key)
-                            :
                 try encode(value, forKey: key)
             case let value as Int:
                 try encode(value, forKey: key)
