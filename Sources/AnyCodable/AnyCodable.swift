@@ -108,7 +108,7 @@ public extension UnkeyedDecodingContainer {
                 array.append(value)
             } else if let nestedDictionary = try? decode([String: Any].self) {
                 array.append(nestedDictionary)
-            } else if let nestedArray = try? decode([Any].self) {
+            } else if var container = try? nestedUnkeyedContainer(), let nestedArray = try? container.decode([Any].self) {
                 array.append(nestedArray)
             }
         }
@@ -197,7 +197,8 @@ public extension UnkeyedEncodingContainer {
             case let value as [String: Any]:
                 try encode(value)
             case let value as [Any]:
-                try encode(value)
+                var unkeyedContainer = self.nestedUnkeyedContainer()
+                try unkeyedContainer.encode(value)
             case Optional<Any>.none, is NSNull:
                 try encodeNil()
             default:
