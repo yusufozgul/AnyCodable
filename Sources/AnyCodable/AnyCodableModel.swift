@@ -72,6 +72,8 @@ public extension AnyCodableModel {
 // MARK: - CustomStringConvertible
 extension AnyCodableModel: CustomStringConvertible {
     public var description: String {
+        guard !(value is NSNull) else { return "" }
+        
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: self.value, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
             if let jsonString = String(data: jsonData, encoding: .utf8) {

@@ -178,4 +178,19 @@ final class AnyCodableTests: XCTestCase {
 
         XCTAssertEqual(decoded.sizeExpectations.description, encodedJsonText)
     }
+
+    func test_CustomStringConvertibleWithNullValue() throws {
+        let jsonText = """
+{
+  "sizeExpectations": null
+}
+"""
+
+        let data = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoded = try JSONDecoder().decode(DemoModel.self, from: data)
+
+        let encodedJsonText = ""
+
+        XCTAssertEqual(decoded.sizeExpectations.description, encodedJsonText)
+    }
 }
