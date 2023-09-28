@@ -73,7 +73,7 @@ public extension AnyCodableModel {
 extension AnyCodableModel: CustomStringConvertible {
     public var description: String {
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self.value, options: [.prettyPrinted, .sortedKeys])
+            let jsonData = try JSONSerialization.data(withJSONObject: self.value, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 return jsonString
             }

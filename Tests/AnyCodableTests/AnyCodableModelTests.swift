@@ -148,4 +148,34 @@ final class AnyCodableTests: XCTestCase {
         XCTAssertEqual(decoded.sizeExpectations.description, encodedJsonText)
     }
 
+    func test_CustomStringConvertibleWithLinks() throws {
+        let jsonText = """
+{
+  "sizeExpectations": {
+    "colors": {
+      "selectedColor": {
+        "foregroundColor": "F27A1A",
+        "link": "https://yusufozgul.com"
+      }
+    }
+  }
+}
+"""
+
+        let data = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoded = try JSONDecoder().decode(DemoModel.self, from: data)
+
+        let encodedJsonText = """
+{
+  "colors" : {
+    "selectedColor" : {
+      "foregroundColor" : "F27A1A",
+      "link" : "https://yusufozgul.com"
+    }
+  }
+}
+"""
+
+        XCTAssertEqual(decoded.sizeExpectations.description, encodedJsonText)
+    }
 }
