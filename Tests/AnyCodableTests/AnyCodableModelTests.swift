@@ -193,4 +193,15 @@ final class AnyCodableTests: XCTestCase {
 
         XCTAssertEqual(decoded.sizeExpectations.description, encodedJsonText)
     }
+
+    func test_NotValidJson() throws {
+        let jsonText = "1"
+
+        let data = try XCTUnwrap(jsonText.data(using: .utf8))
+        let decoded = try JSONDecoder().decode(AnyCodableModel.self, from: data)
+
+        let encodedJsonText = "Not Valid JSON"
+
+        XCTAssertEqual(decoded.description, encodedJsonText)
+    }
 }

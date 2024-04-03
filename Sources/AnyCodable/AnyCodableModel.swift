@@ -75,6 +75,9 @@ extension AnyCodableModel: CustomStringConvertible {
         guard !(value is NSNull) else { return "" }
         
         do {
+            guard JSONSerialization.isValidJSONObject(value) else {
+                return "Not Valid JSON"
+            }
             let jsonData = try JSONSerialization.data(withJSONObject: self.value, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 return jsonString
